@@ -3,6 +3,7 @@ package com.example.SimulacroParcial.models;
 import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -24,22 +25,7 @@ public class Candidate {
 
     //Lazy:Trae solo lo que necesito. En caso de
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "candidate")
-    //@toStringExclude()
+    @ToString.Exclude
     private List<Vote> votes;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Candidate)) return false;
-        Candidate candidate = (Candidate) o;
-        return Objects.equals(id, candidate.id) &&
-                Objects.equals(name, candidate.name) &&
-                Objects.equals(surname, candidate.surname) &&
-                Objects.equals(politicalParty, candidate.politicalParty);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, surname, politicalParty);
-    }
 }
